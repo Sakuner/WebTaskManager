@@ -1,0 +1,49 @@
+
+  <select [(ngModel)]="selectedUser" (ngModelChange)="onUserSelectionChange()">
+    <option [ngValue]="null" disabled hidden>Select User</option>
+    <option *ngFor="let user of users" [ngValue]="user">{{ user.name }}</option>
+  </select>
+
+  <div *ngIf="selectedUser">
+    <div style="display: flex; gap: 5%;">
+      <div style="flex: 1;">
+        <h4>Available Tasks</h4>
+        <ul>
+          <li *ngFor="let t of tasks">
+            <button style="margin: 5px;" (click)="assignTaskToUser(t)">Assign</button>
+            <strong>{{ t.title }}</strong> (difficulty: {{ t.difficulty }})
+          </li>
+        </ul>
+      </div>
+  
+      <div style="flex: 1;">
+        <h4>Assigned Tasks</h4>
+        <ul>
+          <li *ngFor="let t of pendingAssignedTasks">
+            <strong>{{ t.title }}</strong> (difficulty: {{ t.difficulty }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div style="margin-top: 1rem; text-align: center;">
+      <button 
+        style="padding: 10px 20px;" 
+        (click)="saveAssignedTasks()" 
+        [disabled]="!hasUnsavedChanges"
+      >
+        Save Changes
+      </button>
+    </div>
+
+    <div *ngIf="validationMessage" style="margin-top: 1rem; text-align: center;">
+          {{ validationMessage }}
+      </div>
+  </div>
+  
+  
+  <div *ngIf="!selectedUser">
+    <p>Please select a user to view tasks.</p>
+  </div>
+  
+  

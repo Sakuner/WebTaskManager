@@ -1,0 +1,12 @@
+{
+  "/tasks": {
+    "target": "https://localhost:7116",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/users": {
+    "target": "https://localhost:7116",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
