@@ -1,59 +1,25 @@
-# WebTaskManagerFront
+# WebTaskManager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Prosta aplikacja prezentująca przypisywanie zadań użytkownikom. Zalecane odpalanie najpierw backendu, a potem frontu przez ng serve. <br> <br>
 
-## Development server
+Zadanie zacząłem od backendu. Jako, że jest to mały projekt to zdecydowałem o użyciu minimal api i zostawienie logiki domenowej w endpointach. Podzieliłem backend na warstwy typu endpointy, modele, utility. Jako, że dane miały być mockowane dodałem do tego generator tasków. <br>
+Po przejściu na frontend, wygenerowałem serwisy i modele z backendu za pomocą openapi, co pomogło ze spójnością. Założyłem, że najpierw potrzebuje listy użytkowników i dopiero po wybraniu któregoś z nich będą pobierane taski. W aplikacji użytkownik wprowadza zmiany dotyczące przypisanych zadań, ale te zmiany są zapisywane dopiero po naciśnięciu przycisku "Zapisz". Aby zapewnić przejrzystość i kontrolę nad procesem przypisywania zadań, zaprojektowałem system z podziałem na trzy kategorie zadań: z podziałem na dostępne, zapisane i w toku. Dzięki temu podejściu użytkownik ma pełną kontrolę nad tym, które zmiany są widoczne, a które są w trakcie edycji, a jednocześnie zapobiega to przypadkowemu utraceniu niezapisanych zmian. <br>
+Na koniec dodałem proste komunikaty o błędach oraz walidacje czy użytkownik zamyka strone przed zapisaniem zmian.  <br> <br>
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Rzeczy które bym przemyślał/zaadoptował gdyby był to projekt na większą skalę, z potrzebą dalszego utrzymywania: <br>
+-rozwinięcie clean architecture na backendzie między innymi poprzez jaśniejszy podział na warstwy - projekty (np. WebApi, Application, Domain) zamiast na same foldery, dodanie kontrolerów i serwisów do łączności z bazą danych,  <br>
+-w przypadku podłączenia do bazy odróżnienie encji domenowych od obiektów przesyłanych (dto) <br>
+-zastosowanie wzorca CQRS dla jasnego podziału odpowiedzialności i lepszej skalowalności <br>
+-dependency Injection zamiast statycznych serwisów <br>
+-testy jednostkowe <br> <br>
+Front: <br> 
+-zdecydowana poprawa wyglądu aplikacji <br>
+-dodanie spinnerów/loaderów w celu informowaniu użytkownika o pobieraniu danych <br>
+-paginacja <br>
+-dodanie walidacji od strony klienta <br>
+-obsługa błedów z backendu poprzez toasty z bardziej dokładną informacją <br>
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
